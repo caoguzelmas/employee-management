@@ -31,4 +31,28 @@ public class ExpenseServiceImpl implements ExpenseService {
         expenseDB = expenseRepo.getOne(expenseId);
         return modelMapper.map(expenseDB,ExpenseDTO.class);
     }
+
+    @Override
+    public ExpenseDTO getAllExpenses() {
+       return modelMapper.map(expenseRepo.getAllBy(), ExpenseDTO.class);
+    }
+
+    @Override
+    public ExpenseDTO update(Long id, ExpenseDTO expense) {
+        ExpenseEntity expenseFromDB = expenseRepo.getOne(id);
+        if (expenseFromDB.getExpense_id() == null) {
+            throw new IllegalArgumentException("Expense could not found! ID:" + id);
+        }
+        expenseFromDB.setExpenseMonth(expense.getExpenseMonth());
+        expenseFromDB.setExpenseYear(expense.getExpenseYear());
+        expenseFromDB.setTotalAmount(expense.getTotalAmount());
+
+        expenseRepo.save(expenseFromDB);
+        return modelMapper.map(expenseFromDB, ExpenseDTO.class);
+    }
+
+    public Boolean delete(Long id) {
+        expenseRepo.deleteById(id);
+        return true;
+    }
 }

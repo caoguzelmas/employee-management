@@ -15,8 +15,6 @@ public class EmployeeDTO {
     private String eMail;
     private String phoneNumber;
     private String photo;
-    private List<LeaveEntity> leave;
-    private List<ExpenseEntity> expense;
 
     public Long getId() {
         return id;
@@ -80,21 +78,5 @@ public class EmployeeDTO {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public List<LeaveEntity> getLeave() {
-        return leave;
-    }
-
-    public void setLeave(List<LeaveEntity> leave) {
-        this.leave = leave;
-    }
-
-    public List<ExpenseEntity> getExpense() {
-        return expense;
-    }
-
-    public void setExpense(List<ExpenseEntity> expense) {
-        this.expense = expense;
     }
 }

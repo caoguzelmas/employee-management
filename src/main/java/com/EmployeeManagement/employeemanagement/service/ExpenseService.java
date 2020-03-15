@@ -9,5 +9,10 @@ public interface ExpenseService {
 
     ExpenseDTO save(ExpenseDTO expense);
 
-    ExpenseDTO getByExpId(Long exenseId);
+    ExpenseDTO getByExpId(Long expenseId);
+
+    ExpenseDTO getAllExpenses();
+
+    ExpenseDTO update(Long id, ExpenseDTO expense);
+
 }

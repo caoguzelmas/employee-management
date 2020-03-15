@@ -32,4 +32,24 @@ public class LeaveServiceImpl implements LeaveService {
         leaveDB = leaveRepo.getOne(leaveId);
         return modelMapper.map(leaveDB, LeaveDTO.class);
     }
+
+    @Override
+    public LeaveDTO update(Long id, LeaveDTO leave) {
+        LeaveEntity leaveFromDB = leaveRepo.getOne(id);
+        if (leaveFromDB.getLeaveID() == null) {
+            throw new IllegalArgumentException("Leave could not found! ID:" + id);
+        }
+
+        leaveFromDB.setLeaveType(leave.getLeaveType());
+        leaveFromDB.setStartDate(leave.getStartDate());
+        leaveFromDB.setEndDate(leave.getEndDate());
+
+        leaveRepo.save(leaveFromDB);
+        return modelMapper.map(leaveFromDB, LeaveDTO.class);
+    }
+
+    public Boolean delete(Long id) {
+        leaveRepo.deleteById(id);
+        return true;
+    }
 }

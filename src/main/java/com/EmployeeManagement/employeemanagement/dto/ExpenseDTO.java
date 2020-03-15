@@ -7,7 +7,7 @@ public class ExpenseDTO {
     private String expenseMonth;
     private String expenseYear;
     private Float totalAmount;
-    private EmployeeEntity employee;
+    // private EmployeeEntity employee;
 
     public Long getExpense_id() {
         return expense_id;
@@ -41,11 +41,11 @@ public class ExpenseDTO {
         this.totalAmount = totalAmount;
     }
 
-    public EmployeeEntity getEmployee() {
+/*    public EmployeeEntity getEmployee() {
         return employee;
     }
 
     public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
-    }
+    }*/
 }

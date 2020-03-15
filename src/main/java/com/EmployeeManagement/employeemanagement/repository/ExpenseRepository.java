@@ -15,4 +15,6 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity,Long> {
     Page<ExpenseEntity> findAll(Pageable pageable);
 
     List<ExpenseEntity> findAll(Sort sort);
+
+    List<ExpenseEntity> getAllBy();
 }

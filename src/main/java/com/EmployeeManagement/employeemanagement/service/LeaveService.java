@@ -11,4 +11,5 @@ public interface LeaveService {
 
     LeaveDTO getByLeaveId(Long leaveId);
 
+    LeaveDTO update(Long id, LeaveDTO leave);
 }

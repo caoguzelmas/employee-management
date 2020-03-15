@@ -13,8 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name="employee")
-@NoArgsConstructor
-@AllArgsConstructor
 public class EmployeeEntity extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

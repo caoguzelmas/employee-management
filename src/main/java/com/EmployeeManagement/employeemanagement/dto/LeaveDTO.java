@@ -10,7 +10,7 @@ public class LeaveDTO {
     private Date startDate;
     private Date endDate;
     private LeaveType leaveType;
-    private EmployeeEntity employee;
+  //  private EmployeeEntity employee;
 
     public Long getLeaveID() {
         return leaveID;
@@ -44,11 +44,11 @@ public class LeaveDTO {
         this.leaveType = leaveType;
     }
 
-    public EmployeeEntity getEmployee() {
+/*    public EmployeeEntity getEmployee() {
         return employee;
     }
 
     public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
-    }
+    }*/
 }

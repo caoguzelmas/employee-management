@@ -7,6 +7,8 @@ import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*Interface üzerinden implemente edilen methodlar, Repository'de oluşturulan
  methodları döndürecek şekilde çağrılır.*/
 
@@ -32,8 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO getById(Long id) {
-        EmployeeEntity employeeDB = modelMapper.map(id, EmployeeEntity.class);
-        employeeDB = employeeRepo.getOne(id);
+        EmployeeEntity employeeDB = employeeRepo.getOne(id);
         return modelMapper.map(employeeDB, EmployeeDTO.class);
     }
 
@@ -43,10 +44,35 @@ public class EmployeeServiceImpl implements EmployeeService {
         return true;
     }
 
+    public Boolean delete(Long id) {
+        employeeRepo.deleteById(id);
+        return true;
+    }
+
     @Override
     public EmployeeDTO getByName(EmployeeDTO employee) {
         EmployeeEntity emloyeeDB = modelMapper.map(employee, EmployeeEntity.class);
         emloyeeDB = employeeRepo.getByFirstNameAndLastName(employee.getFirstName(), employee.getLastName());
         return modelMapper.map(emloyeeDB, EmployeeDTO.class);
     }
+
+    @Override
+    public EmployeeDTO update(Long id, EmployeeDTO employee) {
+        EmployeeEntity employeeFromDB = employeeRepo.getOne(id);
+        if (employeeFromDB.getId() == null ) {
+            throw new IllegalArgumentException("Employee could not found! ID:" + id);
+        }
+
+        employeeFromDB.setFirstName(employee.getFirstName());
+        employeeFromDB.setLastName(employee.getLastName());
+        employeeFromDB.seteMail(employee.geteMail());
+        employeeFromDB.setPhoneNumber(employee.getPhoneNumber());
+        employeeFromDB.setTitle(employee.getTitle());
+        employeeFromDB.setDepartment(employee.getDepartment());
+        employeeFromDB.setPhoto(employee.getPhoto());
+
+        employeeRepo.save(employeeFromDB);
+        return modelMapper.map(employeeFromDB, EmployeeDTO.class);
+    }
+
 }
