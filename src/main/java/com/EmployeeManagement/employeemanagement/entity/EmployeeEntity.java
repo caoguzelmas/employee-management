@@ -24,7 +24,6 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-
     @Column(name = "title")
     private String title;
 
@@ -48,6 +47,10 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @JoinColumn(name = "expense_req")
     private List<ExpenseEntity> expense;
 
+    @OneToOne
+    @JoinColumn(name = "related_user")
+    private UserEntity user;
+
     public List<LeaveEntity> getLeave() {
         return leave;
     }
@@ -66,6 +69,14 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public void setId(Long id) {

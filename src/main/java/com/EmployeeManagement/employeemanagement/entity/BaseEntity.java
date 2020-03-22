@@ -1,7 +1,5 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -15,13 +13,16 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIME)
     private Date createdAt;
+
     @Column(name = "created_by", length = 100)
     private String createdBy;
+
     @Column(name = "updated_at")
-    @Temporal(TemporalType.TIME)
-    private Date updatedAt;
+    private String updatedAt;
+
     @Column(name = "updated_by", length = 100)
     private String updatedBy;
+
     @Column(name = "status")
     private Boolean status;
 
@@ -41,11 +42,11 @@ public abstract class BaseEntity implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 

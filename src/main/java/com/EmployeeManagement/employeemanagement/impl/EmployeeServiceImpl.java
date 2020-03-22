@@ -7,6 +7,8 @@ import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /*Interface üzerinden implemente edilen methodlar, Repository'de oluşturulan
@@ -70,6 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeFromDB.setTitle(employee.getTitle());
         employeeFromDB.setDepartment(employee.getDepartment());
         employeeFromDB.setPhoto(employee.getPhoto());
+        employeeFromDB.setUpdatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
 
         employeeRepo.save(employeeFromDB);
         return modelMapper.map(employeeFromDB, EmployeeDTO.class);
