@@ -4,12 +4,15 @@ import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
+import org.dozer.DozerBeanMapper;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+
 
 /*Interface üzerinden implemente edilen methodlar, Repository'de oluşturulan
  methodları döndürecek şekilde çağrılır.*/
@@ -19,17 +22,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepo;
     private final ModelMapper modelMapper;
+    private final DozerBeanMapper dozerBeanMapper;
 
     //final değişken yalnızca constructor içerisinde değiştirilebilir.
-    public EmployeeServiceImpl(EmployeeRepository employeeRepo, ModelMapper modelMapper) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepo, ModelMapper modelMapper, DozerBeanMapper dozerBeanMapper) {
         this.employeeRepo = employeeRepo;
         this.modelMapper = modelMapper;
+        this.dozerBeanMapper = dozerBeanMapper;
     }
     // mapper genel mantığı apı altında tüm entity dönüşünün önüne geçmesi.
     @Override
     public EmployeeDTO save(EmployeeDTO employee) {
         // employee objesi Entity altına map edildi. employeeDB değişkeninde tutuldu.
         EmployeeEntity employeeDB = modelMapper.map(employee, EmployeeEntity.class);
+        employeeDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
         employeeDB = employeeRepo.save(employeeDB); // save işlemi repo altında burada gerçekleşti.
         return modelMapper.map(employeeDB, EmployeeDTO.class); // DTO altına map edilmiş hali geri döndürüldü.
     }
@@ -40,11 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return modelMapper.map(employeeDB, EmployeeDTO.class);
     }
 
-    @Override
-    public Boolean delete(EmployeeEntity employee) {
-        employeeRepo.delete(employee);
-        return true;
-    }
+
 
     public Boolean delete(Long id) {
         employeeRepo.deleteById(id);
@@ -76,6 +78,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepo.save(employeeFromDB);
         return modelMapper.map(employeeFromDB, EmployeeDTO.class);
+    }
+
+    @Override
+    public Page<EmployeeEntity> getEmployeesByPagination(Pageable pageable) {
+        Page<EmployeeEntity> allEmployeesPaged = employeeRepo.findAll(pageable);
+        return allEmployeesPaged;
     }
 
 }

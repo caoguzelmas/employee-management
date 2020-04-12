@@ -8,6 +8,9 @@ public class UserDTO {
     private String userName;
     private String password;
     private UserType userRole;
+    private String createdAt;
+    private String updatedAt;
+    private EmployeeDTO employee;
 
     public Long getUserId() {
         return userId;
@@ -39,5 +42,29 @@ public class UserDTO {
 
     public void setUserRole(UserType userRole) {
         this.userRole = userRole;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public EmployeeDTO getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeDTO employee) {
+        this.employee = employee;
     }
 }

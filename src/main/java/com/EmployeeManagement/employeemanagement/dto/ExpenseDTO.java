@@ -7,7 +7,9 @@ public class ExpenseDTO {
     private String expenseMonth;
     private String expenseYear;
     private Float totalAmount;
-    // private EmployeeEntity employee;
+    private String updatedAt;
+    private String createdAt;
+    private EmployeeDTO employee;
 
     public Long getExpense_id() {
         return expense_id;
@@ -41,11 +43,27 @@ public class ExpenseDTO {
         this.totalAmount = totalAmount;
     }
 
-/*    public EmployeeEntity getEmployee() {
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public EmployeeDTO getEmployee() {
         return employee;
     }
 
-    public void setEmployee(EmployeeEntity employee) {
+    public void setEmployee(EmployeeDTO employee) {
         this.employee = employee;
-    }*/
+    }
 }

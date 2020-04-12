@@ -15,6 +15,8 @@ public class EmployeeDTO {
     private String eMail;
     private String phoneNumber;
     private String photo;
+    private String createdAt;
+    private String updatedAt;
 
     public Long getId() {
         return id;
@@ -78,5 +80,21 @@ public class EmployeeDTO {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

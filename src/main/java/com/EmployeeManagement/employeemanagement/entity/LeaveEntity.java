@@ -21,17 +21,17 @@ public class LeaveEntity extends BaseEntity implements Serializable {
     private Long leaveID;
 
     @Column(name = "s_date")
-    private Date startDate;
+    private String startDate;
 
     @Column(name = "e_date")
-    private Date endDate;
+    private String endDate;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "leave_type")
+    @Enumerated(EnumType.STRING)
     private LeaveType leaveType;
 
-    @JoinColumn(name = "leave_employee")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
 
     public EmployeeEntity getEmployee() {
@@ -50,19 +50,19 @@ public class LeaveEntity extends BaseEntity implements Serializable {
         this.leaveID = leaveID;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

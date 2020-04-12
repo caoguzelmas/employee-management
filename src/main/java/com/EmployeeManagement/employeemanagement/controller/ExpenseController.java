@@ -1,18 +1,22 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.ExpenseDTO;
+import com.EmployeeManagement.employeemanagement.entity.ExpenseEntity;
 import com.EmployeeManagement.employeemanagement.impl.ExpenseServiceImpl;
+import com.EmployeeManagement.employeemanagement.service.ExpenseService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+
 
 
 @RestController
 @RequestMapping("/expenses")
 public class ExpenseController {
 
-    private final ExpenseServiceImpl expenseService;
+    private final ExpenseService expenseService;
     public ExpenseController(ExpenseServiceImpl expenseService) {
         this.expenseService = expenseService;
     }
@@ -27,9 +31,9 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.getByExpId(id));
     }
 
-    @GetMapping("/getAllExpenses")
-    public ResponseEntity<ExpenseDTO> getAllExpenses() {
-        return ResponseEntity.ok(expenseService.getAllExpenses());
+    @GetMapping("/geExpensesByPagination")
+    public ResponseEntity<Page<ExpenseEntity>> getAllExpenses(Pageable pageable) {
+        return ResponseEntity.ok(expenseService.getAllExpensesPaged(pageable));
     }
 
     @PutMapping("{id}")

@@ -21,8 +21,8 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Column(name = "role")
     private UserType userRole;
 
-    @OneToOne
-    @JoinColumn(name = "related_employee")
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
     public Long getUserId() {
@@ -49,7 +49,7 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.password = password;
     }
 
-    public Enum getUserRole() {
+    public UserType getUserRole() {
         return userRole;
     }
 

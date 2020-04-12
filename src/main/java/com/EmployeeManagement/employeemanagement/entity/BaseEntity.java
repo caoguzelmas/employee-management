@@ -2,8 +2,6 @@ package com.EmployeeManagement.employeemanagement.entity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,8 +9,7 @@ import java.util.Date;
 public abstract class BaseEntity implements Serializable {
 
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIME)
-    private Date createdAt;
+    private String createdAt;
 
     @Column(name = "created_by", length = 100)
     private String createdBy;
@@ -26,11 +23,11 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "status")
     private Boolean status;
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

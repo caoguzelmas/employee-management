@@ -1,6 +1,8 @@
 package com.EmployeeManagement.employeemanagement.repository;
 
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +16,4 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     EmployeeEntity getByFirstNameAndLastName(String firstName, String lastName);
 
-    List<EmployeeEntity> findAll();
 }

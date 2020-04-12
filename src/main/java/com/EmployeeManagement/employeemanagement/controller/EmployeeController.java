@@ -1,7 +1,11 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
+import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.impl.EmployeeServiceImpl;
+import com.EmployeeManagement.employeemanagement.service.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +15,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeServiceImpl employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeServiceImpl employeeService) {
         this.employeeService = employeeService;
@@ -21,6 +25,11 @@ public class EmployeeController {
     public ResponseEntity<EmployeeDTO> getById(@PathVariable("id") Long id) {
       EmployeeDTO employeeDTO =  this.employeeService.getById(id);
       return ResponseEntity.ok(employeeDTO);
+    }
+
+    @GetMapping("/getEmployeesByPagination")
+    public ResponseEntity<Page<EmployeeEntity>> getEmployeesWithPagination(Pageable pageable) {
+        return ResponseEntity.ok(employeeService.getEmployeesByPagination(pageable));
     }
 
     @PostMapping()

@@ -1,18 +1,20 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.UserDTO;
-import com.EmployeeManagement.employeemanagement.impl.EmployeeServiceImpl;
+import com.EmployeeManagement.employeemanagement.entity.UserEntity;
 import com.EmployeeManagement.employeemanagement.impl.UserServiceImpl;
+import com.EmployeeManagement.employeemanagement.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
@@ -37,5 +39,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.delete(id));
+    }
+
+    @GetMapping("getUsersByPagination")
+    public ResponseEntity<Page<UserEntity>> getUsersByPagination(Pageable pageable) {
+        return ResponseEntity.ok(userService.getUsersByPagination(pageable));
     }
 }

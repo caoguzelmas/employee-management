@@ -23,6 +23,10 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @JoinColumn(name = "employee_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EmployeeEntity employee;
+
     public Long getTimeSheetId() {
         return timeSheetId;
     }
@@ -61,5 +65,13 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
     }
 }

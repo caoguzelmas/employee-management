@@ -39,17 +39,25 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @Column(name = "photo")
     private String photo;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "leave_req")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<LeaveEntity> leave;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "expense_req")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<ExpenseEntity> expense;
 
-    @OneToOne
-    @JoinColumn(name = "related_user")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
     private UserEntity user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<TimeSheetEntity> timeSheets;
+
+    public List<TimeSheetEntity> getTimeSheets() {
+        return timeSheets;
+    }
+
+    public void setTimeSheets(List<TimeSheetEntity> timeSheets) {
+        this.timeSheets = timeSheets;
+    }
 
     public List<LeaveEntity> getLeave() {
         return leave;
