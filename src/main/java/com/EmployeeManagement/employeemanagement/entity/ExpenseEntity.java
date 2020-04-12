@@ -26,6 +26,10 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
     @Column(name = "total_amount")
     private Float totalAmount;
 
+    @JoinColumn(name = "employee_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EmployeeEntity employee;
+
 
     public Long getExpense_id() {
         return expense_id;
@@ -57,5 +61,13 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
 
     public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
     }
 }
