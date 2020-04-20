@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -15,51 +16,74 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "exp_id")
-    private Long expense_id;
+    private Long expenseId;
 
     @Column(name = "exp_month")
-    private String expenseMonth;
+    private Long expenseMonth;
 
     @Column(name = "exp_year")
-    private String expenseYear;
+    private Long expenseYear;
 
     @Column(name = "total_amount")
-    private Float totalAmount;
+    private Double totalAmount;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "expense_type")
+    private String expenseType;
+
+    @JsonBackReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
 
 
-    public Long getExpense_id() {
-        return expense_id;
+    public String getExpenseType() {
+        return expenseType;
     }
 
-    public void setExpense_id(Long expense_id) {
-        this.expense_id = expense_id;
+    public void setExpenseType(String expenseType) {
+        this.expenseType = expenseType;
     }
 
-    public String getExpenseMonth() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getExpenseId() {
+        return expenseId;
+    }
+
+    public void setExpenseId(Long expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public Long getExpenseMonth() {
         return expenseMonth;
     }
 
-    public void setExpenseMonth(String expenseMonth) {
+    public void setExpenseMonth(Long expenseMonth) {
         this.expenseMonth = expenseMonth;
     }
 
-    public String getExpenseYear() {
+    public Long getExpenseYear() {
         return expenseYear;
     }
 
-    public void setExpenseYear(String expenseYear) {
+    public void setExpenseYear(Long expenseYear) {
         this.expenseYear = expenseYear;
     }
 
-    public Float getTotalAmount() {
+    public Double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Float totalAmount) {
+    public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
 

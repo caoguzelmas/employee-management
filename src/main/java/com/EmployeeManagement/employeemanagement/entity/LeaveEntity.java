@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,18 +22,29 @@ public class LeaveEntity extends BaseEntity implements Serializable {
     private Long leaveID;
 
     @Column(name = "s_date")
-    private String startDate;
+    private Date startDate;
 
     @Column(name = "e_date")
-    private String endDate;
+    private Date endDate;
 
     @Column(name = "leave_type")
-    @Enumerated(EnumType.STRING)
-    private LeaveType leaveType;
+    private String leaveType;
 
+    @Column(name = "description")
+    private String description;
+
+    @JsonBackReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public EmployeeEntity getEmployee() {
         return employee;
@@ -50,27 +62,27 @@ public class LeaveEntity extends BaseEntity implements Serializable {
         this.leaveID = leaveID;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public LeaveType getLeaveType() {
+    public String getLeaveType() {
         return leaveType;
     }
 
-    public void setLeaveType(LeaveType leaveType) {
+    public void setLeaveType(String leaveType) {
         this.leaveType = leaveType;
     }
 }

@@ -1,5 +1,7 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,6 +23,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Column(name = "role")
     private UserType userRole;
 
+    @JsonBackReference
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;

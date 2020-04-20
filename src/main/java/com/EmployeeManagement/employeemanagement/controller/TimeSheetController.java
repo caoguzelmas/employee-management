@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.ws.Response;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/timeSheets")
 public class TimeSheetController {
 

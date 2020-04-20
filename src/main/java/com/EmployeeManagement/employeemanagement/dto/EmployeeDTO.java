@@ -17,6 +17,15 @@ public class EmployeeDTO {
     private String photo;
     private String createdAt;
     private String updatedAt;
+    private Long daysLeft;
+
+    public Long getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(Long daysLeft) {
+        this.daysLeft = daysLeft;
+    }
 
     public Long getId() {
         return id;

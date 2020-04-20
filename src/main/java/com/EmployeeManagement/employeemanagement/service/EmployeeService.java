@@ -23,4 +23,5 @@ public interface EmployeeService {
 
     Page<EmployeeEntity> getEmployeesByPagination(Pageable pageable);
 
+    Page<EmployeeEntity> getEmployeesHasTimeSheets(Pageable pageable);
 }

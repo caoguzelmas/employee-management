@@ -4,7 +4,7 @@ import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
 import com.EmployeeManagement.employeemanagement.dto.ExpenseDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.entity.ExpenseEntity;
-import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
+import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 import com.EmployeeManagement.employeemanagement.repository.ExpenseRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import com.EmployeeManagement.employeemanagement.service.ExpenseService;
@@ -35,6 +35,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         expenseDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
         EmployeeDTO employee = employeeService.getById(expense.getEmployee().getId());
         expenseDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));
+        expenseDB.setCreatedBy(modelMapper.map(employee, EmployeeEntity.class).getFirstName() + ' ' + modelMapper.map(employee, EmployeeEntity.class).getLastName());
         expenseDB = expenseRepo.save(expenseDB);
         return modelMapper.map(expenseDB,ExpenseDTO.class);
     }
@@ -49,7 +50,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public ExpenseDTO update(Long id, ExpenseDTO expense) {
         ExpenseEntity expenseFromDB = expenseRepo.getOne(id);
-        if (expenseFromDB.getExpense_id() == null) {
+        if (expenseFromDB.getExpenseId() == null) {
             throw new IllegalArgumentException("Expense could not found! ID:" + id);
         }
         expenseFromDB.setExpenseMonth(expense.getExpenseMonth());
@@ -71,4 +72,5 @@ public class ExpenseServiceImpl implements ExpenseService {
         expenseRepo.deleteById(id);
         return true;
     }
+
 }

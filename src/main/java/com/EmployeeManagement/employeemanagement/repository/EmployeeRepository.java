@@ -16,4 +16,6 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     EmployeeEntity getByFirstNameAndLastName(String firstName, String lastName);
 
+    Page<EmployeeEntity> findAllByTimeSheetsIsNotNull(Pageable pageable);
+
 }

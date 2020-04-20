@@ -1,17 +1,18 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "leave_types")
-public class LeaveType implements Serializable {
+@Table(name="expense_types")
+public class ExpenseType implements Serializable {
 
     @Id
-    private Long leaveTypeID;
+    private Long expenseTypeID;
 
     @Column(name = "short_code")
     private String shortCode;
@@ -19,12 +20,12 @@ public class LeaveType implements Serializable {
     @Column(name = "name")
     private String name;
 
-    public Long getLeaveTypeID() {
-        return leaveTypeID;
+    public Long getExpenseTypeID() {
+        return expenseTypeID;
     }
 
-    public void setLeaveTypeID(Long leaveTypeID) {
-        this.leaveTypeID = leaveTypeID;
+    public void setExpenseTypeID(Long expenseTypeID) {
+        this.expenseTypeID = expenseTypeID;
     }
 
     public String getShortCode() {
@@ -42,4 +43,5 @@ public class LeaveType implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 }

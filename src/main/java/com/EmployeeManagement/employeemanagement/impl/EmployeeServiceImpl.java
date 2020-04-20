@@ -86,4 +86,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return allEmployeesPaged;
     }
 
+    @Override
+    public Page<EmployeeEntity> getEmployeesHasTimeSheets(Pageable pageable) {
+        Page<EmployeeEntity> allEmployeesHasTimeSheets = employeeRepo.findAllByTimeSheetsIsNotNull(pageable);
+        return allEmployeesHasTimeSheets;
+    }
+
 }

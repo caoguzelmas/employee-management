@@ -7,9 +7,9 @@ import java.util.Date;
 
 public class LeaveDTO {
     private Long leaveID;
-    private String startDate;
-    private String endDate;
-    private LeaveType leaveType;
+    private Date startDate;
+    private Date endDate;
+    private String leaveType;
     private String createdAt;
     private String updatedAt;
     private EmployeeDTO employee;
@@ -22,27 +22,27 @@ public class LeaveDTO {
         this.leaveID = leaveID;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public LeaveType getLeaveType() {
+    public String getLeaveType() {
         return leaveType;
     }
 
-    public void setLeaveType(LeaveType leaveType) {
+    public void setLeaveType(String leaveType) {
         this.leaveType = leaveType;
     }
 

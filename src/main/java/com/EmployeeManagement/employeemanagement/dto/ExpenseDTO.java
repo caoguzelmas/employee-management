@@ -1,45 +1,55 @@
 package com.EmployeeManagement.employeemanagement.dto;
 
-import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
+import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 
 public class ExpenseDTO {
-    private Long expense_id;
-    private String expenseMonth;
-    private String expenseYear;
-    private Float totalAmount;
+    private Long expenseId;
+    private Long expenseMonth;
+    private Long expenseYear;
+    private Double totalAmount;
     private String updatedAt;
     private String createdAt;
     private EmployeeDTO employee;
+    private String expenseType;
+    private String description;
 
-    public Long getExpense_id() {
-        return expense_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExpense_id(Long expense_id) {
-        this.expense_id = expense_id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getExpenseMonth() {
+    public Long getExpenseId() {
+        return expenseId;
+    }
+
+    public void setExpenseId(Long expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public Long getExpenseMonth() {
         return expenseMonth;
     }
 
-    public void setExpenseMonth(String expenseMonth) {
+    public void setExpenseMonth(Long expenseMonth) {
         this.expenseMonth = expenseMonth;
     }
 
-    public String getExpenseYear() {
+    public Long getExpenseYear() {
         return expenseYear;
     }
 
-    public void setExpenseYear(String expenseYear) {
+    public void setExpenseYear(Long expenseYear) {
         this.expenseYear = expenseYear;
     }
 
-    public Float getTotalAmount() {
+    public Double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Float totalAmount) {
+    public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -65,5 +75,13 @@ public class ExpenseDTO {
 
     public void setEmployee(EmployeeDTO employee) {
         this.employee = employee;
+    }
+
+    public String getExpenseType() {
+        return expenseType;
+    }
+
+    public void setExpenseType(String expenseType) {
+        this.expenseType = expenseType;
     }
 }

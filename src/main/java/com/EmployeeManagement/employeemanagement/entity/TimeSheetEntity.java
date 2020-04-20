@@ -1,5 +1,7 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -23,6 +25,7 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @JsonBackReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;

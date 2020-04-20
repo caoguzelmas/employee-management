@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -39,17 +40,32 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @Column(name = "photo")
     private String photo;
 
+    @Column(name = "days_left")
+    private Long daysLeft;
+
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<LeaveEntity> leave;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<ExpenseEntity> expense;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
     private UserEntity user;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<TimeSheetEntity> timeSheets;
+
+    public Long getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(Long daysLeft) {
+        this.daysLeft = daysLeft;
+    }
 
     public List<TimeSheetEntity> getTimeSheets() {
         return timeSheets;
