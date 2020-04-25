@@ -2,6 +2,7 @@ package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 import com.EmployeeManagement.employeemanagement.entity.LeaveType;
+import com.EmployeeManagement.employeemanagement.entity.UserType;
 import com.EmployeeManagement.employeemanagement.impl.CommonServiceImpl;
 import com.EmployeeManagement.employeemanagement.service.ICommonService;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,11 @@ public class CommonController {
     @GetMapping("/getAllLeaveTypes")
     public ResponseEntity<List<LeaveType>> getAllLeaveTypes() {
         return ResponseEntity.ok(commonService.getAllLeaveTypes());
+    }
+
+    @GetMapping("/getAllUserRoleTypes")
+    public ResponseEntity<List<UserType>> getAllUserRoleTypes() {
+        return ResponseEntity.ok(commonService.getAllUserRoleTypes());
     }
 
 

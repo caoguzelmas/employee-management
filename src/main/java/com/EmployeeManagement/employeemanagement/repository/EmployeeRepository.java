@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.repository;
 
+import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
     EmployeeEntity getByFirstNameAndLastName(String firstName, String lastName);
 
     Page<EmployeeEntity> findAllByTimeSheetsIsNotNull(Pageable pageable);
+
+    EmployeeEntity findEmployeeEntityByeMail(String eMail);
 
 }

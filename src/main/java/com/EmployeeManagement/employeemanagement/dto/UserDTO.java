@@ -7,10 +7,19 @@ public class UserDTO {
     private Long userId;
     private String userName;
     private String password;
-    private UserType userRole;
+    private String userRole;
+    private String eMail;
     private String createdAt;
     private String updatedAt;
     private EmployeeDTO employee;
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
 
     public Long getUserId() {
         return userId;
@@ -36,11 +45,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserType getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserType userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 

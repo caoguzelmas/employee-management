@@ -33,10 +33,21 @@ public class LeaveEntity extends BaseEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "req_number_of_days")
+    private Long requestedNumberOfDays;
+
     @JsonBackReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
+
+    public Long getRequestedNumberOfDays() {
+        return requestedNumberOfDays;
+    }
+
+    public void setRequestedNumberOfDays(Long requestedNumberOfDays) {
+        this.requestedNumberOfDays = requestedNumberOfDays;
+    }
 
     public String getDescription() {
         return description;

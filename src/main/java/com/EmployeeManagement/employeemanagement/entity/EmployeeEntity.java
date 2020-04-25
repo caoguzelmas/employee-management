@@ -31,7 +31,7 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @Column(name = " department")
     private String department;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String eMail;
 
     @Column(name = "phone_number")

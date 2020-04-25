@@ -19,14 +19,24 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Column(name = "pass")
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private UserType userRole;
+    private String userRole;
+
+    @Column(name = "e_mail")
+    private String eMail;
 
     @JsonBackReference
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
 
     public Long getUserId() {
         return userId;
@@ -52,7 +62,7 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.password = password;
     }
 
-    public UserType getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
@@ -64,7 +74,7 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.employee = employee;
     }
 
-    public void setUserRole(UserType userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 }

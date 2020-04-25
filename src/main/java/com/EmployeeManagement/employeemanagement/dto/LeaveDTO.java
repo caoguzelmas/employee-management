@@ -12,7 +12,25 @@ public class LeaveDTO {
     private String leaveType;
     private String createdAt;
     private String updatedAt;
+    private String description;
+    private Long requestedNumberOfDays;
     private EmployeeDTO employee;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getRequestedNumberOfDays() {
+        return requestedNumberOfDays;
+    }
+
+    public void setRequestedNumberOfDays(Long requestedNumberOfDays) {
+        this.requestedNumberOfDays = requestedNumberOfDays;
+    }
 
     public Long getLeaveID() {
         return leaveID;

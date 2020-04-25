@@ -1,12 +1,14 @@
 package com.EmployeeManagement.employeemanagement.repository;
 
-import com.EmployeeManagement.employeemanagement.entity.UserEntity;
+import com.EmployeeManagement.employeemanagement.entity.LeaveType;
 import com.EmployeeManagement.employeemanagement.entity.UserType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+import java.util.List;
 
-    UserEntity getByUserNameAndUserRole(String userName, String N);
+@Repository
+public interface IUserRoleTypeRepository extends JpaRepository<UserType, Long> {
+
+    List<UserType> findAll();
 }

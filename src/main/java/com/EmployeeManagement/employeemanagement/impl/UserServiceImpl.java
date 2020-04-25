@@ -31,8 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO save(UserDTO user) {
         UserEntity userDB = modelMapper.map(user, UserEntity.class);
-        EmployeeDTO employee = employeeService.getById(user.getEmployee().getId());
-        userDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));
+/*        EmployeeDTO employee = employeeService.getById(user.getEmployee().getId());
+        userDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));*/
+
+        EmployeeEntity relatedEmployee = employeeService.getEmployeeByEMail(userDB.geteMail());
+        userDB.setEmployee(relatedEmployee);
         userDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
         userDB = userRepo.save(userDB);
         return modelMapper.map(userDB, UserDTO.class);
@@ -66,6 +69,9 @@ public class UserServiceImpl implements UserService {
         userFromDB.setUserName(user.getUserName());
         userFromDB.setPassword(user.getPassword());
         userFromDB.setUserRole(user.getUserRole());
+        EmployeeEntity relatedEmployee = employeeService.getEmployeeByEMail(user.geteMail());
+        userFromDB.setEmployee(relatedEmployee);
+        userFromDB.seteMail(user.geteMail());
         userFromDB.setUpdatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
 
         userRepo.save(userFromDB);

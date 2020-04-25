@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*Bu interface üzerinde bu interfacei implemente edecek Class için methodlar oluşturulur.*/
 
 @Service
@@ -24,4 +26,6 @@ public interface EmployeeService {
     Page<EmployeeEntity> getEmployeesByPagination(Pageable pageable);
 
     Page<EmployeeEntity> getEmployeesHasTimeSheets(Pageable pageable);
+
+    EmployeeEntity getEmployeeByEMail(String email);
 }

@@ -55,6 +55,8 @@ public class LeaveServiceImpl implements LeaveService {
         leaveFromDB.setLeaveType(leave.getLeaveType());
         leaveFromDB.setStartDate(leave.getStartDate());
         leaveFromDB.setEndDate(leave.getEndDate());
+        leaveFromDB.setDescription(leave.getDescription());
+        leaveFromDB.setRequestedNumberOfDays(leave.getRequestedNumberOfDays());
         leaveFromDB.setUpdatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
 
         leaveRepo.save(leaveFromDB);

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*Interface üzerinden implemente edilen methodlar, Repository'de oluşturulan
@@ -90,6 +92,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<EmployeeEntity> getEmployeesHasTimeSheets(Pageable pageable) {
         Page<EmployeeEntity> allEmployeesHasTimeSheets = employeeRepo.findAllByTimeSheetsIsNotNull(pageable);
         return allEmployeesHasTimeSheets;
+    }
+
+    @Override
+    public EmployeeEntity getEmployeeByEMail(String eMail) {
+        EmployeeEntity employeeFoundByEMail = employeeRepo.findEmployeeEntityByeMail(eMail);
+        return employeeFoundByEMail;
     }
 
 }
