@@ -10,6 +10,7 @@ package com.EmployeeManagement.employeemanagement.impl;
         import org.modelmapper.ModelMapper;
         import org.springframework.data.domain.Page;
         import org.springframework.data.domain.Pageable;
+        import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
         import org.springframework.stereotype.Service;
 
         import java.time.LocalDateTime;
@@ -21,11 +22,14 @@ public class UserServiceImpl implements UserService {
     private  final UserRepository userRepo;
     private final ModelMapper modelMapper;
     private final EmployeeService employeeService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImpl(UserRepository userRepo,EmployeeService employeeService,ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepo,EmployeeService employeeService,ModelMapper modelMapper,
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.modelMapper = modelMapper;
         this.userRepo = userRepo;
         this.employeeService = employeeService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -36,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
         EmployeeEntity relatedEmployee = employeeService.getEmployeeByEMail(userDB.geteMail());
         userDB.setEmployee(relatedEmployee);
+        userDB.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
         userDB = userRepo.save(userDB);
         return modelMapper.map(userDB, UserDTO.class);
@@ -67,7 +72,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userFromDB.setUserName(user.getUserName());
-        userFromDB.setPassword(user.getPassword());
+        userFromDB.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userFromDB.setUserRole(user.getUserRole());
         EmployeeEntity relatedEmployee = employeeService.getEmployeeByEMail(user.geteMail());
         userFromDB.setEmployee(relatedEmployee);

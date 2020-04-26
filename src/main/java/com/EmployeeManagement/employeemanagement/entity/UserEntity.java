@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="users")
+@Table(name="users", indexes = {@Index(name = "index_userName", columnList = "u_name")})
 public class UserEntity extends BaseEntity implements Serializable {
 
     @Id
