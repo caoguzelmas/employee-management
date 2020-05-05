@@ -2,16 +2,25 @@ package com.EmployeeManagement.employeemanagement.dto;
 
 import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 
+import java.util.Date;
+
 public class ExpenseDTO {
     private Long expenseId;
-    private Long expenseMonth;
-    private Long expenseYear;
     private Double totalAmount;
     private String updatedAt;
     private String createdAt;
     private EmployeeDTO employee;
     private String expenseType;
     private String description;
+    private Date expenseDate;
+
+    public Date getExpenseDate() {
+        return expenseDate;
+    }
+
+    public void setExpenseDate(Date expenseDate) {
+        this.expenseDate = expenseDate;
+    }
 
     public String getDescription() {
         return description;
@@ -27,22 +36,6 @@ public class ExpenseDTO {
 
     public void setExpenseId(Long expenseId) {
         this.expenseId = expenseId;
-    }
-
-    public Long getExpenseMonth() {
-        return expenseMonth;
-    }
-
-    public void setExpenseMonth(Long expenseMonth) {
-        this.expenseMonth = expenseMonth;
-    }
-
-    public Long getExpenseYear() {
-        return expenseYear;
-    }
-
-    public void setExpenseYear(Long expenseYear) {
-        this.expenseYear = expenseYear;
     }
 
     public Double getTotalAmount() {

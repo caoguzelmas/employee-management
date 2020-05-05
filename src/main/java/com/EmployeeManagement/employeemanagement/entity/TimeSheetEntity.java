@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "time_sheets")
@@ -13,11 +14,8 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long timeSheetId;
 
-    @Column(name = "start_date")
-    private String startDate;
-
-    @Column(name = "end_date")
-    private String endDate;
+    @Column(name = "time_sheet_date")
+    private Date timeSheetDate;
 
     @Column(name = "hours")
     private Long hours;
@@ -25,10 +23,21 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "project")
+    private String project;
+
     @JsonBackReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
 
     public Long getTimeSheetId() {
         return timeSheetId;
@@ -38,20 +47,12 @@ public class TimeSheetEntity extends BaseEntity implements Serializable {
         this.timeSheetId = timeSheetId;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public Date getTimeSheetDate() {
+        return timeSheetDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setTimeSheetDate(Date timeSheetDate) {
+        this.timeSheetDate = timeSheetDate;
     }
 
     public Long getHours() {

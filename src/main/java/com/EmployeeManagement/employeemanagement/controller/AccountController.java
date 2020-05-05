@@ -32,6 +32,6 @@ public class AccountController {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
         final UserEntity user = userRepository.findByuserName(request.getUserName());
         final String token = jwtTokenUtil.generateToken(user);
-        return ResponseEntity.ok(new TokenResponse(user.getUserName(), token, user.getUserRole()));
+        return ResponseEntity.ok(new TokenResponse(user, token));
     }
 }

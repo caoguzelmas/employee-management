@@ -1,11 +1,13 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="expenses")
@@ -18,11 +20,8 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
     @Column(name = "exp_id")
     private Long expenseId;
 
-    @Column(name = "exp_month")
-    private Long expenseMonth;
-
-    @Column(name = "exp_year")
-    private Long expenseYear;
+    @Column(name="exp_date")
+    private Date expenseDate;
 
     @Column(name = "total_amount")
     private Double totalAmount;
@@ -33,11 +32,18 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
     @Column(name = "expense_type")
     private String expenseType;
 
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
 
+    public Date getExpenseDate() {
+        return expenseDate;
+    }
+
+    public void setExpenseDate(Date expenseDate) {
+        this.expenseDate = expenseDate;
+    }
 
     public String getExpenseType() {
         return expenseType;
@@ -61,22 +67,6 @@ public class ExpenseEntity extends BaseEntity implements Serializable {
 
     public void setExpenseId(Long expenseId) {
         this.expenseId = expenseId;
-    }
-
-    public Long getExpenseMonth() {
-        return expenseMonth;
-    }
-
-    public void setExpenseMonth(Long expenseMonth) {
-        this.expenseMonth = expenseMonth;
-    }
-
-    public Long getExpenseYear() {
-        return expenseYear;
-    }
-
-    public void setExpenseYear(Long expenseYear) {
-        this.expenseYear = expenseYear;
     }
 
     public Double getTotalAmount() {

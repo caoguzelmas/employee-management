@@ -1,6 +1,8 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
+import com.EmployeeManagement.employeemanagement.dto.TimeSheetAndUserBody;
 import com.EmployeeManagement.employeemanagement.dto.TimeSheetDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.TimeSheetEntity;
 import com.EmployeeManagement.employeemanagement.impl.TimeSheetServiceImpl;
 import com.EmployeeManagement.employeemanagement.repository.TimeSheetRepository;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -47,5 +50,15 @@ public class TimeSheetController {
     @GetMapping("/getTimeSheetsByPagination")
     public ResponseEntity<Page<TimeSheetEntity>> getTimeSheetsByPagination(Pageable pageable) {
         return ResponseEntity.ok(timeSheetService.getTimeSheetsByPagination(pageable));
+    }
+
+    @PostMapping("/getTimeSheetsOfEmployeeAsList")
+    public ResponseEntity<List<TimeSheetEntity>> getTimeSheetsOfEmployeeAsList(@RequestBody UserDTO user) {
+        return ResponseEntity.ok(timeSheetService.getTimeSheetsOfEmployeeAsList(user));
+    }
+
+    @PostMapping("/getTimeSheetByDate")
+    public ResponseEntity<TimeSheetEntity> getTimeSheetByDate(@RequestBody TimeSheetAndUserBody timeSheetAndUserBody) {
+        return ResponseEntity.ok(timeSheetService.getTimeSheetByDate(timeSheetAndUserBody));
     }
 }

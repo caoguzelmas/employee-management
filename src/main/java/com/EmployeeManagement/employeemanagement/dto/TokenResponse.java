@@ -1,34 +1,25 @@
 package com.EmployeeManagement.employeemanagement.dto;
 
+import com.EmployeeManagement.employeemanagement.entity.UserEntity;
 import lombok.Data;
 
 @Data
 public class TokenResponse {
 
-    private String userName;
+    UserEntity user;
     private String token;
-    private String userRole;
 
-    public TokenResponse(String userName, String token, String userRole) {
-        this.userName = userName;
+    public TokenResponse(UserEntity user, String token) {
+        this.user = user;
         this.token = token;
-        this.userRole = userRole;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public String getToken() {

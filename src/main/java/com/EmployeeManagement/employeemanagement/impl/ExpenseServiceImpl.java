@@ -2,9 +2,11 @@ package com.EmployeeManagement.employeemanagement.impl;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
 import com.EmployeeManagement.employeemanagement.dto.ExpenseDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.entity.ExpenseEntity;
 import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
+import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
 import com.EmployeeManagement.employeemanagement.repository.ExpenseRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import com.EmployeeManagement.employeemanagement.service.ExpenseService;
@@ -15,27 +17,32 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 
     private final ExpenseRepository expenseRepo;
+    private final EmployeeRepository employeeRepository;
     private final EmployeeService employeeService;
     private final ModelMapper modelMapper;
 
-    public ExpenseServiceImpl(ExpenseRepository expenseRepo,ModelMapper modelMapper,EmployeeService employeeService){
+    public ExpenseServiceImpl(ExpenseRepository expenseRepo,ModelMapper modelMapper,
+                              EmployeeService employeeService,EmployeeRepository employeeRepository){
         this.expenseRepo = expenseRepo;
         this.modelMapper = modelMapper;
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
     public ExpenseDTO save(ExpenseDTO expense) {
         ExpenseEntity expenseDB = modelMapper.map(expense,ExpenseEntity.class);
-        expenseDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+        expenseDB.setCreatedAt(new java.util.Date());
         EmployeeDTO employee = employeeService.getById(expense.getEmployee().getId());
         expenseDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));
-        expenseDB.setCreatedBy(modelMapper.map(employee, EmployeeEntity.class).getFirstName() + ' ' + modelMapper.map(employee, EmployeeEntity.class).getLastName());
+        expenseDB.setCreatedBy(employee.getFirstName() + ' ' + employee.getLastName());
         expenseDB = expenseRepo.save(expenseDB);
         return modelMapper.map(expenseDB,ExpenseDTO.class);
     }
@@ -53,8 +60,9 @@ public class ExpenseServiceImpl implements ExpenseService {
         if (expenseFromDB.getExpenseId() == null) {
             throw new IllegalArgumentException("Expense could not found! ID:" + id);
         }
-        expenseFromDB.setExpenseMonth(expense.getExpenseMonth());
-        expenseFromDB.setExpenseYear(expense.getExpenseYear());
+        expenseFromDB.setExpenseDate(expense.getExpenseDate());
+        expenseFromDB.setExpenseType(expense.getExpenseType());
+        expenseFromDB.setDescription(expense.getDescription());
         expenseFromDB.setTotalAmount(expense.getTotalAmount());
         expenseFromDB.setUpdatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
 
@@ -62,15 +70,26 @@ public class ExpenseServiceImpl implements ExpenseService {
         return modelMapper.map(expenseFromDB, ExpenseDTO.class);
     }
 
-    @Override
-    public Page<ExpenseEntity> getAllExpensesPaged(Pageable pageable) {
-        Page<ExpenseEntity> allExpensesWithPaged= expenseRepo.findAll(pageable);
-        return allExpensesWithPaged;
-    }
-
     public Boolean delete(Long id) {
         expenseRepo.deleteById(id);
         return true;
+    }
+
+    @Override
+    public Page<ExpenseEntity> getExpensesByUserBody(UserDTO user, Pageable pageable) {
+        EmployeeEntity employeeFoundByUser = employeeRepository.findEmployeeEntityByeMail(user.geteMail());
+        return expenseRepo.getAllByEmployeeEquals(employeeFoundByUser, pageable);
+    }
+
+    @Override
+    public Page<ExpenseEntity> getAllExpensesWithPagination(Pageable pageable) {
+        Page<ExpenseEntity> allExpenses = expenseRepo.findAll(pageable);
+        return allExpenses;
+    }
+
+    @Override
+    public List<ExpenseEntity> getExpensesBetweenDates(Date startingDate, Date endingDate) {
+        return expenseRepo.getAllByCreatedAtBetween(startingDate, endingDate);
     }
 
 }

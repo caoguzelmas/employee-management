@@ -2,6 +2,7 @@ package com.EmployeeManagement.employeemanagement.service;
 
 import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 import com.EmployeeManagement.employeemanagement.entity.LeaveType;
+import com.EmployeeManagement.employeemanagement.entity.Project;
 import com.EmployeeManagement.employeemanagement.entity.UserType;
 import org.springframework.stereotype.Service;
 
@@ -14,4 +15,6 @@ public interface ICommonService {
     List<LeaveType> getAllLeaveTypes();
 
     List<UserType> getAllUserRoleTypes();
+
+    List<Project> getAllProjects();
 }

@@ -2,6 +2,7 @@ package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
 import com.EmployeeManagement.employeemanagement.entity.LeaveType;
+import com.EmployeeManagement.employeemanagement.entity.Project;
 import com.EmployeeManagement.employeemanagement.entity.UserType;
 import com.EmployeeManagement.employeemanagement.impl.CommonServiceImpl;
 import com.EmployeeManagement.employeemanagement.service.ICommonService;
@@ -37,6 +38,11 @@ public class CommonController {
     @GetMapping("/getAllUserRoleTypes")
     public ResponseEntity<List<UserType>> getAllUserRoleTypes() {
         return ResponseEntity.ok(commonService.getAllUserRoleTypes());
+    }
+
+    @GetMapping("/getAllProjects")
+    public ResponseEntity<List<Project>> getAllProjects() {
+        return ResponseEntity.ok(commonService.getAllProjects());
     }
 
 

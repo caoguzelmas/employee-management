@@ -1,10 +1,14 @@
 package com.EmployeeManagement.employeemanagement.service;
 
 import com.EmployeeManagement.employeemanagement.dto.ExpenseDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.ExpenseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public interface ExpenseService {
@@ -15,7 +19,11 @@ public interface ExpenseService {
 
     ExpenseDTO update(Long id, ExpenseDTO expense);
 
-    Page<ExpenseEntity> getAllExpensesPaged(Pageable pageable);
-
     Boolean delete(Long id);
+
+    Page<ExpenseEntity> getExpensesByUserBody(UserDTO user, Pageable pageable);
+
+    Page<ExpenseEntity> getAllExpensesWithPagination(Pageable pageable);
+
+    List<ExpenseEntity> getExpensesBetweenDates(Date startingDate, Date endingDate);
 }

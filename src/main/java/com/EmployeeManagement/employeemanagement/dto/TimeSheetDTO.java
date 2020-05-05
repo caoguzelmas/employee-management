@@ -1,16 +1,18 @@
 package com.EmployeeManagement.employeemanagement.dto;
 
 
+import java.util.Date;
+
 public class TimeSheetDTO {
 
     private Long timeSheetId;
-    private String startDate;
-    private String endDate;
+    private Date timeSheetDate;
     private Long hours;
     private String description;
     private String createdAt;
     private String updatedAt;
     private EmployeeDTO employee;
+    private String project;
 
     public Long getTimeSheetId() {
         return timeSheetId;
@@ -20,20 +22,20 @@ public class TimeSheetDTO {
         this.timeSheetId = timeSheetId;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public Date getTimeSheetDate() {
+        return timeSheetDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public String getProject() {
+        return project;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public void setProject(String project) {
+        this.project = project;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setTimeSheetDate(Date timeSheetDate) {
+        this.timeSheetDate = timeSheetDate;
     }
 
     public Long getHours() {

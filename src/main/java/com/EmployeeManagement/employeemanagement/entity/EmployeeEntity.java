@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -43,20 +44,20 @@ public class EmployeeEntity extends BaseEntity implements Serializable {
     @Column(name = "days_left")
     private Long daysLeft;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<LeaveEntity> leave;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<ExpenseEntity> expense;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
     private UserEntity user;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
     private List<TimeSheetEntity> timeSheets;
 
     public Long getDaysLeft() {

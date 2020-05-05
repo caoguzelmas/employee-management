@@ -2,8 +2,10 @@ package com.EmployeeManagement.employeemanagement.impl;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
 import com.EmployeeManagement.employeemanagement.dto.LeaveDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.entity.LeaveEntity;
+import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
 import com.EmployeeManagement.employeemanagement.repository.LeaveRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import com.EmployeeManagement.employeemanagement.service.LeaveService;
@@ -19,22 +21,25 @@ import java.time.format.DateTimeFormatter;
 public class LeaveServiceImpl implements LeaveService {
 
     private final LeaveRepository leaveRepo;
+    private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
     private final EmployeeService employeeService;
 
-    public LeaveServiceImpl(LeaveRepository leaveRepo, ModelMapper modelMapper,EmployeeService employeeService){
+    public LeaveServiceImpl(LeaveRepository leaveRepo, ModelMapper modelMapper,EmployeeService employeeService,EmployeeRepository employeeRepository){
         this.leaveRepo = leaveRepo;
         this.modelMapper = modelMapper;
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
 
     @Override
     public LeaveDTO save(LeaveDTO leave) {
         LeaveEntity leaveDB = modelMapper.map(leave, LeaveEntity.class);
-        EmployeeDTO employee = employeeService.getById(leave.getEmployee().getId());
+        EmployeeDTO employee =  employeeService.getById(leave.getEmployee().getId());
         leaveDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));
-        leaveDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+        leaveDB.setCreatedAt(new java.util.Date());
+        leaveDB.setCreatedBy(employee.getFirstName() + ' ' + employee.getLastName());
         leaveDB = leaveRepo.save(leaveDB);
         return modelMapper.map(leaveDB,LeaveDTO.class);
     }
@@ -70,7 +75,12 @@ public class LeaveServiceImpl implements LeaveService {
 
     @Override
     public Page<LeaveEntity> getLeavesByPagination(Pageable pageable) {
-        Page<LeaveEntity> allLeavesPaged =  leaveRepo.findAll(pageable);
-        return allLeavesPaged;
+        return leaveRepo.findAll(pageable);
+    }
+
+    @Override
+    public Page<LeaveEntity> getLeavesByEmployeeBody(UserDTO user, Pageable pageable) {
+        EmployeeEntity employeeFoundByUser = employeeRepository.findEmployeeEntityByeMail(user.geteMail());
+        return leaveRepo.getAllByEmployeeEquals(employeeFoundByUser, pageable);
     }
 }

@@ -1,9 +1,12 @@
 package com.EmployeeManagement.employeemanagement.impl;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
+import com.EmployeeManagement.employeemanagement.dto.TimeSheetAndUserBody;
 import com.EmployeeManagement.employeemanagement.dto.TimeSheetDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.entity.TimeSheetEntity;
+import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
 import com.EmployeeManagement.employeemanagement.repository.TimeSheetRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
 import com.EmployeeManagement.employeemanagement.service.TimeSheetService;
@@ -22,12 +25,15 @@ public class TimeSheetServiceImpl implements TimeSheetService {
 
     private final ModelMapper modelMapper;
     private final TimeSheetRepository timeSheetRepo;
+    private final EmployeeRepository employeeRepository;
     private final EmployeeService employeeService;
 
-    public TimeSheetServiceImpl(ModelMapper modelMapper,EmployeeService employeeService,TimeSheetRepository timeSheetRepo) {
+    public TimeSheetServiceImpl(ModelMapper modelMapper,EmployeeService employeeService,TimeSheetRepository timeSheetRepo,
+                                EmployeeRepository employeeRepository) {
         this.timeSheetRepo = timeSheetRepo;
         this.modelMapper = modelMapper;
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -35,7 +41,7 @@ public class TimeSheetServiceImpl implements TimeSheetService {
         TimeSheetEntity timeSheetDB = modelMapper.map(timeSheet, TimeSheetEntity.class);
         EmployeeDTO employee = employeeService.getById(timeSheet.getEmployee().getId());
         timeSheetDB.setEmployee(modelMapper.map(employee, EmployeeEntity.class));
-        timeSheetDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+        timeSheetDB.setCreatedAt(new java.util.Date());
         timeSheetDB = timeSheetRepo.save(timeSheetDB);
         return modelMapper.map(timeSheetDB, TimeSheetDTO.class);
     }
@@ -55,8 +61,7 @@ public class TimeSheetServiceImpl implements TimeSheetService {
 
         timeSheetFromDB.setUpdatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
         timeSheetFromDB.setHours(timeSheet.getHours());
-        timeSheetFromDB.setStartDate(timeSheet.getStartDate());
-        timeSheetFromDB.setEndDate(timeSheet.getEndDate());
+        timeSheetFromDB.setTimeSheetDate(timeSheet.getTimeSheetDate());
         timeSheetFromDB.setDescription(timeSheet.getDescription());
 
         timeSheetRepo.save(timeSheetFromDB);
@@ -72,5 +77,17 @@ public class TimeSheetServiceImpl implements TimeSheetService {
     public Page<TimeSheetEntity> getTimeSheetsByPagination(Pageable pageable) {
         Page<TimeSheetEntity> allTimeSheetsPaged = timeSheetRepo.findAll(pageable);
         return allTimeSheetsPaged;
+    }
+
+    @Override
+    public List<TimeSheetEntity> getTimeSheetsOfEmployeeAsList(UserDTO user) {
+        EmployeeEntity employeeFoundByUser = employeeRepository.findEmployeeEntityByeMail(user.geteMail());
+        return timeSheetRepo.getAllByEmployeeEquals(employeeFoundByUser);
+    }
+
+    @Override
+    public TimeSheetEntity getTimeSheetByDate(TimeSheetAndUserBody timeSheetAndUserBody) {
+        EmployeeEntity employeeFoundByEmail = employeeRepository.findEmployeeEntityByeMail(timeSheetAndUserBody.getUser().geteMail());
+        return timeSheetRepo.findTimeSheetEntityByTimeSheetDateAndEmployeeEquals(timeSheetAndUserBody.getTimeSheetBody().getTimeSheetDate(), employeeFoundByEmail);
     }
 }

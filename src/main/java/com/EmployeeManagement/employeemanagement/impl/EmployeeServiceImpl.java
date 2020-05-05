@@ -1,6 +1,7 @@
 package com.EmployeeManagement.employeemanagement.impl;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.repository.EmployeeRepository;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO save(EmployeeDTO employee) {
         // employee objesi Entity altına map edildi. employeeDB değişkeninde tutuldu.
         EmployeeEntity employeeDB = modelMapper.map(employee, EmployeeEntity.class);
-        employeeDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+        employeeDB.setCreatedAt(new java.util.Date());
         employeeDB = employeeRepo.save(employeeDB); // save işlemi repo altında burada gerçekleşti.
         return modelMapper.map(employeeDB, EmployeeDTO.class); // DTO altına map edilmiş hali geri döndürüldü.
     }
@@ -51,6 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     public Boolean delete(Long id) {
+
         employeeRepo.deleteById(id);
         return true;
     }

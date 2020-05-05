@@ -9,7 +9,7 @@ import java.util.Date;
 public abstract class BaseEntity implements Serializable {
 
     @Column(name = "created_at")
-    private String createdAt;
+    private Date createdAt;
 
     @Column(name = "created_by", length = 100)
     private String createdBy;
@@ -23,11 +23,12 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "status")
     private Boolean status;
 
-    public String getCreatedAt() {
+
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

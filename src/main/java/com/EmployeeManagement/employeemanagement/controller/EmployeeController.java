@@ -1,6 +1,7 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.EmployeeDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
 import com.EmployeeManagement.employeemanagement.impl.EmployeeServiceImpl;
 import com.EmployeeManagement.employeemanagement.service.EmployeeService;
@@ -46,5 +47,10 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteEmployee(@PathVariable("id") Long id) {
         return ResponseEntity.ok(employeeService.delete(id));
+    }
+
+    @PostMapping("/getEmployeeByUser")
+    public ResponseEntity<EmployeeEntity> getEmployeeByUser(@RequestBody UserDTO user) {
+        return ResponseEntity.ok(employeeService.getEmployeeByEMail(user.geteMail()));
     }
 }

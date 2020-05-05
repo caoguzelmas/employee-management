@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         EmployeeEntity relatedEmployee = employeeService.getEmployeeByEMail(userDB.geteMail());
         userDB.setEmployee(relatedEmployee);
         userDB.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userDB.setCreatedAt(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
+        userDB.setCreatedAt(new java.util.Date());
         userDB = userRepo.save(userDB);
         return modelMapper.map(userDB, UserDTO.class);
     }

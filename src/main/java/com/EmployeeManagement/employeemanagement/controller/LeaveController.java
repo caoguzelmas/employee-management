@@ -1,6 +1,7 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.LeaveDTO;
+import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.LeaveEntity;
 import com.EmployeeManagement.employeemanagement.impl.LeaveServiceImpl;
 import com.EmployeeManagement.employeemanagement.service.LeaveService;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/leaves")
 public class LeaveController {
 
@@ -44,5 +45,10 @@ public class LeaveController {
     @GetMapping("/getLeavesByPagination")
     public ResponseEntity<Page<LeaveEntity>> getLeavesByPagination(Pageable pageable) {
         return ResponseEntity.ok(leaveService.getLeavesByPagination(pageable));
+    }
+
+    @PostMapping("/getLeavesByEmployeeIdWithPagination")
+    public ResponseEntity<Page<LeaveEntity>> getLeavesByEmployeeBody(@RequestBody UserDTO user, Pageable pageable) {
+        return ResponseEntity.ok(leaveService.getLeavesByEmployeeBody(user, pageable));
     }
 }

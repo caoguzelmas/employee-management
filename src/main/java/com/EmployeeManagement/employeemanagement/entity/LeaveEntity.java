@@ -2,6 +2,7 @@ package com.EmployeeManagement.employeemanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,7 +37,7 @@ public class LeaveEntity extends BaseEntity implements Serializable {
     @Column(name = "req_number_of_days")
     private Long requestedNumberOfDays;
 
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "employee_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EmployeeEntity employee;
