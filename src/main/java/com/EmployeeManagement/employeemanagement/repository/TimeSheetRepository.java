@@ -2,6 +2,7 @@ package com.EmployeeManagement.employeemanagement.repository;
 
 import com.EmployeeManagement.employeemanagement.dto.TimeSheetDTO;
 import com.EmployeeManagement.employeemanagement.entity.EmployeeEntity;
+import com.EmployeeManagement.employeemanagement.entity.ExpenseEntity;
 import com.EmployeeManagement.employeemanagement.entity.TimeSheetEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ public interface TimeSheetRepository extends JpaRepository<TimeSheetEntity, Long
 
     TimeSheetEntity findTimeSheetEntityByTimeSheetDateAndEmployeeEquals(Date timeSheetDate, EmployeeEntity employee);
 
+    List<TimeSheetEntity> getAllByCreatedAtBetween(Date startingDate, Date endingDate);
 }

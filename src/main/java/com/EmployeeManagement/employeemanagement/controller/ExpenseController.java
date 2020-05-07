@@ -53,9 +53,4 @@ public class ExpenseController {
     public ResponseEntity<Page<ExpenseEntity>> getAllExpensesWithPagination(Pageable pageable) {
         return ResponseEntity.ok(expenseService.getAllExpensesWithPagination(pageable));
     }
-
-    @PostMapping("/getExpensesBetweenDates")
-    public ResponseEntity<List<ExpenseEntity>> getExpensesBetweenDates(@RequestBody TimeIntervals timeIntervalGroup) {
-        return ResponseEntity.ok(expenseService.getExpensesBetweenDates(timeIntervalGroup.getStartingDate(), timeIntervalGroup.getEndingDate()));
-    }
 }

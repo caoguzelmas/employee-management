@@ -24,6 +24,4 @@ public interface ExpenseService {
     Page<ExpenseEntity> getExpensesByUserBody(UserDTO user, Pageable pageable);
 
     Page<ExpenseEntity> getAllExpensesWithPagination(Pageable pageable);
-
-    List<ExpenseEntity> getExpensesBetweenDates(Date startingDate, Date endingDate);
 }

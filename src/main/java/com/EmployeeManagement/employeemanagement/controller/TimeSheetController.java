@@ -1,5 +1,6 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
+import com.EmployeeManagement.employeemanagement.dto.TimeIntervals;
 import com.EmployeeManagement.employeemanagement.dto.TimeSheetAndUserBody;
 import com.EmployeeManagement.employeemanagement.dto.TimeSheetDTO;
 import com.EmployeeManagement.employeemanagement.dto.UserDTO;

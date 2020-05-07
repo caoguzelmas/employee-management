@@ -86,10 +86,4 @@ public class ExpenseServiceImpl implements ExpenseService {
         Page<ExpenseEntity> allExpenses = expenseRepo.findAll(pageable);
         return allExpenses;
     }
-
-    @Override
-    public List<ExpenseEntity> getExpensesBetweenDates(Date startingDate, Date endingDate) {
-        return expenseRepo.getAllByCreatedAtBetween(startingDate, endingDate);
-    }
-
 }

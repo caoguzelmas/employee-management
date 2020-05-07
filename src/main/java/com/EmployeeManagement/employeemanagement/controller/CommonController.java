@@ -1,16 +1,11 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
-import com.EmployeeManagement.employeemanagement.entity.ExpenseType;
-import com.EmployeeManagement.employeemanagement.entity.LeaveType;
-import com.EmployeeManagement.employeemanagement.entity.Project;
-import com.EmployeeManagement.employeemanagement.entity.UserType;
+import com.EmployeeManagement.employeemanagement.dto.TimeIntervals;
+import com.EmployeeManagement.employeemanagement.entity.*;
 import com.EmployeeManagement.employeemanagement.impl.CommonServiceImpl;
 import com.EmployeeManagement.employeemanagement.service.ICommonService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,6 +38,11 @@ public class CommonController {
     @GetMapping("/getAllProjects")
     public ResponseEntity<List<Project>> getAllProjects() {
         return ResponseEntity.ok(commonService.getAllProjects());
+    }
+
+    @PostMapping("/getAdminDashboardItems")
+    public ResponseEntity<AdminDashboardItems> getAdminDashboardItems(@RequestBody TimeIntervals timeIntervalGroup) {
+        return ResponseEntity.ok(commonService.getAdminDashboardItems(timeIntervalGroup.getStartingDate(), timeIntervalGroup.getEndingDate()));
     }
 
 

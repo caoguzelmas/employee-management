@@ -1,6 +1,7 @@
 package com.EmployeeManagement.employeemanagement.controller;
 
 import com.EmployeeManagement.employeemanagement.dto.LeaveDTO;
+import com.EmployeeManagement.employeemanagement.dto.TimeIntervals;
 import com.EmployeeManagement.employeemanagement.dto.UserDTO;
 import com.EmployeeManagement.employeemanagement.entity.LeaveEntity;
 import com.EmployeeManagement.employeemanagement.impl.LeaveServiceImpl;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
