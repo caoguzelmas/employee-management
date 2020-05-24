@@ -27,4 +27,6 @@ public interface TimeSheetService {
     List<TimeSheetEntity> getTimeSheetsOfEmployeeAsList(UserDTO user);
 
     TimeSheetEntity getTimeSheetByDate(TimeSheetAndUserBody timeSheetAndUserBody);
+
+    List<TimeSheetEntity> getTimeSheetsOfEmployeeById(Long employeeId);
 }

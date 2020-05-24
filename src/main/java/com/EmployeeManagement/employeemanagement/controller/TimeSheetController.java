@@ -58,6 +58,11 @@ public class TimeSheetController {
         return ResponseEntity.ok(timeSheetService.getTimeSheetsOfEmployeeAsList(user));
     }
 
+    @GetMapping("/getTimeSheetsOfEmployeeById/{employeeId}")
+    public ResponseEntity<List<TimeSheetEntity>> getTimeSheetsOfEmployeeById(@PathVariable("employeeId") Long employeeId) {
+        return ResponseEntity.ok(timeSheetService.getTimeSheetsOfEmployeeById(employeeId));
+    }
+
     @PostMapping("/getTimeSheetByDate")
     public ResponseEntity<TimeSheetEntity> getTimeSheetByDate(@RequestBody TimeSheetAndUserBody timeSheetAndUserBody) {
         return ResponseEntity.ok(timeSheetService.getTimeSheetByDate(timeSheetAndUserBody));

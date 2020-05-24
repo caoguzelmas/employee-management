@@ -91,4 +91,10 @@ public class TimeSheetServiceImpl implements TimeSheetService {
         EmployeeEntity employeeFoundByEmail = employeeRepository.findEmployeeEntityByeMail(timeSheetAndUserBody.getUser().geteMail());
         return timeSheetRepo.findTimeSheetEntityByTimeSheetDateAndEmployeeEquals(timeSheetAndUserBody.getTimeSheetBody().getTimeSheetDate(), employeeFoundByEmail);
     }
+
+    @Override
+    public List<TimeSheetEntity> getTimeSheetsOfEmployeeById(Long employeeId) {
+        EmployeeEntity employeeFoundByEmployeeId = employeeRepository.getById(employeeId);
+        return timeSheetRepo.getAllByEmployeeEquals(employeeFoundByEmployeeId);
+    }
 }

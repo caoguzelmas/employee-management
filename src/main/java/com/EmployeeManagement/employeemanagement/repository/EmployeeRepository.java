@@ -22,4 +22,6 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     EmployeeEntity findEmployeeEntityByeMail(String eMail);
 
+    EmployeeEntity getById(Long employeeId);
+
 }
