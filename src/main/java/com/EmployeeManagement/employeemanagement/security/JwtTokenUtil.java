@@ -45,13 +45,13 @@ public class JwtTokenUtil {
     }
 
     public String generateToken(UserEntity user) {
-        return doGenerateToken(user.getUserName());
+        return doGenerateToken(user);
     }
 
-    private String doGenerateToken(String subject) {
+    private String doGenerateToken(UserEntity user) {
 
-        Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("USER")));
+        Claims claims = Jwts.claims().setSubject(user.getUserName());
+        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority(user.getUserRole())));
 
         return Jwts.builder()
                 .setClaims(claims)

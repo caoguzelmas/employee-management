@@ -49,7 +49,7 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.getExpensesByUserBody(user, pageable));
     }
 
-    @GetMapping("/getAllExpensesWithPagination")
+    @GetMapping("/pagination/getAllExpensesWithPagination")
     public ResponseEntity<Page<ExpenseEntity>> getAllExpensesWithPagination(Pageable pageable) {
         return ResponseEntity.ok(expenseService.getAllExpensesWithPagination(pageable));
     }

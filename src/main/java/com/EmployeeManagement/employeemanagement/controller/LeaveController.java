@@ -45,7 +45,7 @@ public class LeaveController {
         return ResponseEntity.ok(leaveService.delete(id));
     }
 
-    @GetMapping("/getLeavesByPagination")
+    @GetMapping("/pagination/getLeavesByPagination")
     public ResponseEntity<Page<LeaveEntity>> getLeavesByPagination(Pageable pageable) {
         return ResponseEntity.ok(leaveService.getLeavesByPagination(pageable));
     }

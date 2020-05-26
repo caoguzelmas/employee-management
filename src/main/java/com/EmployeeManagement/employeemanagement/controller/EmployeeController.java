@@ -23,7 +23,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getById/{id}")
     public ResponseEntity<EmployeeDTO> getById(@PathVariable("id") Long id) {
       EmployeeDTO employeeDTO =  this.employeeService.getById(id);
       return ResponseEntity.ok(employeeDTO);
@@ -34,17 +34,17 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployeesByPagination(pageable));
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employee) {
        return ResponseEntity.ok(employeeService.save(employee));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable("id") Long id, @RequestBody EmployeeDTO employee) {
         return ResponseEntity.ok(employeeService.update(id, employee));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteEmployee(@PathVariable("id") Long id) {
         return ResponseEntity.ok(employeeService.delete(id));
     }

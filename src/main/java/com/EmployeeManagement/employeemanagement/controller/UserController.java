@@ -27,22 +27,22 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         return ResponseEntity.ok(userService.save(user));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO user) {
         return ResponseEntity.ok(userService.update(id,user));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.delete(id));
     }
 
-    @GetMapping("getUsersByPagination")
+    @GetMapping("/pagination/getUsersByPagination")
     public ResponseEntity<Page<UserEntity>> getUsersByPagination(Pageable pageable) {
         return ResponseEntity.ok(userService.getUsersByPagination(pageable));
     }
